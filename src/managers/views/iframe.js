@@ -298,9 +298,9 @@ class IframeView {
 				columns = (width / this.layout.pageWidth);
 				if ( this.layout.divisor > 1 &&
 						 this.layout.name === "reflowable" &&
-						(columns % 2 > 0)) {
+						(columns % this.layout.divisor > 0)) {
 					// add a blank page
-					width += this.layout.pageWidth;
+					width += this.layout.pageWidth * (columns % this.layout.divisor);
 				}
 			}
 
