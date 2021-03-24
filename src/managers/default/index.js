@@ -623,12 +623,10 @@ class DefaultViewManager {
 								this.scrollTo(0, 0, true);
 							}
 							else{
-								const deltas = Math.floor(this.container.scrollWidth / this.layout.delta) - 1;
-								this.scrollTo(-deltas * this.layout.delta, 0, true);
+								this.scrollTo((this.container.scrollWidth * -1) + this.layout.delta, 0, true);
 							}
 						} else {
-							const deltas = Math.floor(this.container.scrollWidth / this.layout.delta) - 1;
-							this.scrollTo(deltas * this.layout.delta, 0, true);
+							this.scrollTo(this.container.scrollWidth - this.layout.delta, 0, true);
 						}
 					}
 					this.views.show();
