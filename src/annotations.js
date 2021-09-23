@@ -92,6 +92,23 @@ class Annotations {
 	}
 
 	/**
+	 * Remove all annotations from store
+	 */
+	removeAll() {
+		const views = this.rendition.views();
+		Object.keys(this._annotations).forEach(hash => {
+			const annotation = this._annotations[hash];
+			views.forEach((view) => {
+				this._removeFromAnnotationBySectionIndex(annotation.sectionIndex, hash);
+				if (annotation.sectionIndex === view.index) {
+					annotation.detach(view);
+				}
+			});
+		});
+		this._annotations = {};
+	}
+
+	/**
 	 * Remove an annotations by Section Index
 	 * @private
 	 */
