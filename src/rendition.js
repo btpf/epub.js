@@ -904,7 +904,7 @@ class Rendition {
 	 */
 	triggerSelectedEvent(cfirange, contents){
 		/**
-		 * Emit that a text selection has occured
+		 * Emit that a text selection has occurred
 		 * @event selected
 		 * @param {string} cfirange
 		 * @param {Contents} contents

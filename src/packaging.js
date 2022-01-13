@@ -224,7 +224,7 @@ class Packaging {
 
 		// var epubcfi = new EpubCFI();
 
-		//-- Add to array to mantain ordering and cross reference with manifest
+		//-- Add to array to maintain ordering and cross reference with manifest
 		items.forEach(function(item, index){
 			var idref = item.getAttribute("idref");
 			// var cfiBase = epubcfi.generateChapterComponent(spineNodeIndex, index, Id);
@@ -234,6 +234,7 @@ class Packaging {
 			// var manifestPropArray = manifestProps.length ? manifestProps.split(" ") : [];
 
 			var itemref = {
+				"id" : item.getAttribute("id"),
 				"idref" : idref,
 				"linear" : item.getAttribute("linear") || "yes",
 				"properties" : propArray,
@@ -279,7 +280,7 @@ class Packaging {
 	 */
 	findNavPath(manifestNode){
 		// Find item with property "nav"
-		// Should catch nav irregardless of order
+		// Should catch nav regardless of order
 		// var node = manifestNode.querySelector("item[properties$='nav'], item[properties^='nav '], item[properties*=' nav ']");
 		var node = qsp(manifestNode, "item", {"properties":"nav"});
 		return node ? node.getAttribute("href") : false;
