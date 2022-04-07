@@ -493,6 +493,9 @@ class DefaultViewManager {
 
 		} else {
 			next = this.views.last().section.next();
+			for (let i = 1; i < n; i++) {
+				next = next.next();
+			}
 		}
 
 		if (next) {
@@ -585,6 +588,9 @@ class DefaultViewManager {
 		} else {
 
 			prev = this.views.first().section.prev();
+			for (let i = 1; i < n; i++) {
+				prev = prev.prev();
+			}
 
 		}
 

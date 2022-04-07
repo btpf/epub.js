@@ -1,6 +1,6 @@
 {
   "name": "epubjs-myh",
-  "version": "0.3.113",
+  "version": "0.3.114",
   "description": "Parse and Render Epubs",
   "main": "lib/index.js",
   "module": "src/index.js",
@@ -43,7 +43,6 @@
     "karma-mocha-reporter": "^2.2.5",
     "karma-phantomjs-launcher": "^1.0.4",
     "karma-sourcemap-loader": "^0.3.7",
-    "karma-webpack": "next",
     "mocha": "^7.2.0",
     "mocha-loader": "^5.0.0",
     "raw-loader": "^4.0.1",
