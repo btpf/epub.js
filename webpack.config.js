@@ -39,7 +39,7 @@ module.exports = {
 	},
 	externals: {
 		"jszip/dist/jszip": "JSZip",
-		"xmldom": "xmldom"
+		"@xmldom/xmldom": "xmldom"
 	},
 	plugins: [],
 	resolve: {
