@@ -38,6 +38,7 @@ class DefaultViewManager {
 			flow: this.settings.flow,
 			layout: this.layout,
 			method: this.settings.method, // srcdoc, blobUrl, write
+			sendToServiceWoker: this.settings.sendToServiceWoker,
 			width: 0,
 			height: 0,
 			forceEvenPages: true

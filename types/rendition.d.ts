@@ -9,6 +9,8 @@ import Annotations from "./annotations";
 import Queue from "./utils/queue";
 
 export interface RenditionOptions {
+  method?: string,
+  sendToServiceWoker?: Function,
   width?: number | string,
   height?: number | string,
   ignoreClass?: string,

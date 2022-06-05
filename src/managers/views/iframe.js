@@ -380,18 +380,29 @@ class IframeView {
 		}
 
 		this.iframe.onload = function(event) {
-
 			this.onLoad(event, loading);
-
 		}.bind(this);
 
 		if (this.settings.method === "blobUrl") {
 			this.blobUrl = createBlobUrl(contents, "application/xhtml+xml");
 			this.iframe.src = this.blobUrl;
 			this.element.appendChild(this.iframe);
-		} else if(this.settings.method === "srcdoc"){
+		} else if(this.settings.method === "srcdoc") {
 			this.iframe.srcdoc = contents;
 			this.element.appendChild(this.iframe);
+		} else if(this.settings.method === "srcFromSw") {
+			// This method loads iframe src virtually from the same origin of parent (window) by a service worker. This works around the issue of iframe with srcdoc or about:blank not inheriting service workers from parent.
+
+			// The following creates a virtual same origin HTML file with a random name, which avoiding multiple requests incorrectly use the same name.
+			// The virtual HTML file is sent to the service worker.
+			const pathname = "/_" + Math.floor(Math.random() * 1e9);
+			this.settings.sendToServiceWoker({
+				pathname,
+				html: contents
+			}).then(() => {
+				this.iframe.src = pathname;
+				this.element.appendChild(this.iframe);
+			});
 		} else {
 
 			this.element.appendChild(this.iframe);
@@ -613,22 +624,21 @@ class IframeView {
 		let h;
 		try {
 			h = this.pane.addMark(m);
+			this.highlights[cfiRange] = { "mark": h, "element": h.element, "listeners": [emitter, cb] };
+
+			h.element.setAttribute("ref", className);
+			h.element.addEventListener("click", emitter);
+			h.element.addEventListener("touchstart", emitter);
+	
+			if (cb) {
+				h.element.addEventListener("click", cb);
+				h.element.addEventListener("touchstart", cb);
+			}
 		} catch (err) {
 			// Print error only for invalid highlights.
 			// Throwing an error here will cause ePub display stops after navigate out and then in a section with an invalid highlight.
 			console.error(err);
-			return;
-		}
-
-		this.highlights[cfiRange] = { "mark": h, "element": h.element, "listeners": [emitter, cb] };
-
-		h.element.setAttribute("ref", className);
-		h.element.addEventListener("click", emitter);
-		h.element.addEventListener("touchstart", emitter);
-
-		if (cb) {
-			h.element.addEventListener("click", cb);
-			h.element.addEventListener("touchstart", cb);
+			//return;
 		}
 		return h;
 	}
