@@ -392,14 +392,9 @@ class IframeView {
 			this.element.appendChild(this.iframe);
 		} else if(this.settings.method === "srcFromSw") {
 			// This method loads iframe src virtually from the same origin of parent (window) by a service worker. This works around the issue of iframe with srcdoc or about:blank not inheriting service workers from parent.
-
-			// The following creates a virtual same origin HTML file with a random name, which avoiding multiple requests incorrectly use the same name.
-			// The virtual HTML file is sent to the service worker.
-			const pathname = "/_" + Math.floor(Math.random() * 1e9);
 			this.settings.sendToServiceWoker({
-				pathname,
 				html: contents
-			}).then(() => {
+			}).then((pathname) => {
 				this.iframe.src = pathname;
 				this.element.appendChild(this.iframe);
 			});
