@@ -68,6 +68,9 @@ export default class Rendition {
     q: Queue;
     location: Location;
     started: Promise<void>;
+    manager?: View & {
+      container: HTMLElement
+    };
 
     adjustImages(contents: Contents): Promise<void>;
 
