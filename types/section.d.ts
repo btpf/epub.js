@@ -24,6 +24,11 @@ export interface SpineItem {
   prev: () => SpineItem,
 }
 
+export interface FindResults {
+  cfi: string,
+  excerpt: string
+}
+
 export default class Section {
   constructor(item: SpineItem, hooks: HooksObject);
 
@@ -48,7 +53,7 @@ export default class Section {
 
   render(_request?: Function): string;
 
-  find(_query: string): Array<Element>;
+  find(_query: string): Array<FindResults>;
 
   reconcileLayoutSettings(globalLayout: GlobalLayout): LayoutSettings;
 
