@@ -44,7 +44,7 @@ export default class Section {
 
   hooks: HooksObject;
 
-  load(_request?: Function): Document;
+  load(_request?: Function): Promise<Document>;
 
   render(_request?: Function): string;
 
