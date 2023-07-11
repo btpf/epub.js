@@ -928,7 +928,7 @@ class Contents {
 			return;
 		}
 		this._onSelectionChange = this.onSelectionChange.bind(this);
-		this.document.addEventListener("selectionchange", this._onSelectionChange, { passive: true });
+		this.document.addEventListener("mouseup", this._onSelectionChange, { passive: true });
 	}
 
 	/**
@@ -939,7 +939,7 @@ class Contents {
 		if(!this.document) {
 			return;
 		}
-		this.document.removeEventListener("selectionchange", this._onSelectionChange, { passive: true });
+		this.document.removeEventListener("mouseup", this._onSelectionChange, { passive: true });
 		this._onSelectionChange = undefined;
 	}
 
@@ -948,13 +948,21 @@ class Contents {
 	 * @private
 	 */
 	onSelectionChange(e){
-		if (this.selectionEndTimeout) {
-			clearTimeout(this.selectionEndTimeout);
-		}
-		this.selectionEndTimeout = setTimeout(function() {
-			var selection = this.window.getSelection();
-			this.triggerSelectedEvent(selection);
-		}.bind(this), 250);
+		// if (this.selectionEndTimeout) {
+		// 	clearTimeout(this.selectionEndTimeout);
+		// }
+		// this.selectionEndTimeout = setTimeout(function() {
+		// 	var selection = this.window.getSelection();
+		// 	this.triggerSelectedEvent(selection);
+		// }.bind(this), 250);
+
+		let selection = this.window.getSelection();
+
+		// Prevents case where text is still selected from before and one clicks on the text
+		if(selection.toString() == this.prevSelection || selection.toString() == '') return
+		this.prevSelection = selection.toString()
+
+		this.triggerSelectedEvent(selection)
 	}
 
 	/**
