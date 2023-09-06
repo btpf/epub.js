@@ -55,7 +55,10 @@ class Section {
 		} else {
 			request(this.url)
 				.then(function(xml){
-					// var directory = new Url(this.url).directory;
+					// when the url has no extension, `request` won't parse it,
+					// so we'll just have to parse it ourselves
+					if (typeof xml === 'string')
+						xml = new DOMParser().parseFromString(xml, 'text/html');
 
 					this.document = xml;
 					this.contents = xml.documentElement;
