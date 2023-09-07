@@ -140,7 +140,7 @@ class Book {
 		 * @member {Locations} locations
 		 * @memberof Book
 		 */
-		this.locations = new Locations(this.spine, this.load.bind(this));
+		this.locations = new Locations(this.spine, this.load.bind(this), 1);
 
 		/**
 		 * @member {Navigation} navigation
