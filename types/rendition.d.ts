@@ -68,6 +68,10 @@ export default class Rendition {
     location: Location;
     started: Promise<void>;
 
+    manager?: View & {
+      container: HTMLElement
+    };
+    
     adjustImages(contents: Contents): Promise<void>;
 
     attachTo(element: Element): Promise<void>;

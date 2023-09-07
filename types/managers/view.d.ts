@@ -77,4 +77,5 @@ export default class View {
   on(type: any, listener: any): any;
 
   once(type: any, listener: any, ...args: any[]): any;
+  pane?:View;
 }
