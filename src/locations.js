@@ -337,8 +337,12 @@ class Locations {
 	 * @param {EpubCFI} cfi
 	 * @return {number}
 	 */
-	percentageFromCfi(cfi) {
+	percentageFromCfi(cfi, index = -1) {
 		if(this._locations.length === 0) {
+			// This will use the index fallback to calculate percentage in the case where the CFI cannot be calculated (CBZ)
+			if(index != -1){
+				return index / (this.spine.length - 1)
+			}
 			return null;
 		}
 		// Find closest cfi
@@ -385,6 +389,10 @@ class Locations {
 	 * @return {EpubCFI} cfi
 	 */
 	cfiFromPercentage(percentage){
+		// This will handle case where we are reading CBZ, do fallback calculation method
+		if(this._locations.length == 0){
+			return `epubcfi(${this.spine.items[Math.floor((this.spine.length - 1) * percentage)].cfiBase}!/0/0)`
+		}
 		let loc;
 		if (percentage > 1) {
 			console.warn("Normalize cfiFromPercentage value to between 0 - 1");
