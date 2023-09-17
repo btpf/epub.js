@@ -1,5 +1,5 @@
 {
-  "name": "epubjs",
+  "name": "@btpf/epubjs",
   "version": "0.3.92",
   "description": "Parse and Render Epubs",
   "main": "lib/index.js",
