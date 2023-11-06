@@ -892,7 +892,7 @@ class Contents {
 		this._triggerEvent = this.triggerEvent.bind(this);
 
 		DOM_EVENTS.forEach(function(eventName){
-			this.document.addEventListener(eventName, this._triggerEvent, { passive: true });
+			this.document.addEventListener(eventName, this._triggerEvent, { passive: false });
 		}, this);
 
 	}
@@ -906,7 +906,7 @@ class Contents {
 			return;
 		}
 		DOM_EVENTS.forEach(function(eventName){
-			this.document.removeEventListener(eventName, this._triggerEvent, { passive: true });
+			this.document.removeEventListener(eventName, this._triggerEvent, { passive: false });
 		}, this);
 		this._triggerEvent = undefined;
 	}
